@@ -13,7 +13,7 @@ len(deck_of_cards.all_cards)
 Player_One = Player("Barbara")
 Player_Two = Player("Artjom")
 
-    
+
 # Split the deck equally    
 splitDeck(deck_of_cards,Player_One,Player_Two)
     
@@ -52,4 +52,3 @@ while game_on:
                     for num in range(5):
                                 player1_list.append(Player_One.remove_one())
                                 player2_list.append(Player_Two.remove_one())
-        
