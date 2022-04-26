@@ -32,7 +32,9 @@ while game_on:
     player1_list = []
     player2_list = []
 
-
+    if round_num > 1000:
+        print("The game goes on for too long! It is a draw!")
+        game_on = False
 #Check if any player is out of cards completely
     if checkPlayerDeck(Player_One,Player_Two) == True:
         game_on = False
@@ -46,9 +48,13 @@ while game_on:
             else:
                 print("IT. IS. WAR!!!")    
                 if checkWarDeck(Player_One,Player_Two) == True:
+                    
                     game_on = False
-                    break
+                    
                 else:
                     for num in range(5):
-                                player1_list.append(Player_One.remove_one())
-                                player2_list.append(Player_Two.remove_one())
+                        try:
+                            player1_list.append(Player_One.remove_one())
+                            player2_list.append(Player_Two.remove_one())
+                        except:
+                            print("The game is over!")

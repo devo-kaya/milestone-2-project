@@ -16,11 +16,13 @@ def checkPlayerDeck(player1,player2):
         return True and print(f"{player1.name} has 0 cards left! {player2.name} Wins!")
     elif len(player2.all_cards) == 0:
         return True and print(f"{player2.name} has 0 cards left! {player1.name} Wins!")
+    else:
+        return False
     
 def checkWarDeck(player1,player2):
-    if len(player1.all_cards) < 5:
+    if len(player1.all_cards) < 8:
         return True and print(f"{player1.name} cannot go to war! {player2.name} Wins!")
-    elif len(player2.all_cards) < 5:
+    elif len(player2.all_cards) < 8:
         return True and print(f"{player2.name} cannot go to war! {player1.name} Wins!")
     else:
         return False
