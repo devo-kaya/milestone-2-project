@@ -18,7 +18,7 @@
 # Extras;
     # 1. Create a list that tracks the palindromes
 # 2. Create a 2nd list that tracks the non-palindromes
-user_input = input('Please type a word here: ')
+# user_input = input('Please type a word here: ')
 
 
 #Palindrome script
@@ -42,6 +42,6 @@ checkPalindrome(user_input)
 
 
 
-  
+
 # dictionary with uppercases & counts
 # for loop or map: is key uppercase? then count value ot sum

@@ -17,47 +17,54 @@ def display_board(board):
 
 
 def player_input():
+    marker = ''
     
-    choice = 'wrong'
-    choice2 = 'wrong'
-    
-    while choice and choice2 not in ['X', 'O']:
-        
-        choice = input("Choose X or O as a player 1: ")
-        player1 = choice
-        choice2 = input("Please choose the opposite as player 2: ")
-        player2 = choice2
-        
-        if choice and choice2 not in ['X','O']:          
-            print("Sorry, I didn't understand. Please make sure to choose X or O.")
-    if choice and choice2 == 'X' or 'O': 
-        return (choice, choice2)
+    while not (marker == 'X' or marker == 'O'):
+        marker = input('Player 1: Do you want to be X or O? ').upper()
+
+    if marker == 'X':
+        return ('X', 'O')
     else:
-        return False        
+        return ('O', 'X')
+    
+    # choice = 'wrong'
+    # choice2 = 'wrong'
+    
+    # while choice and choice2 not in ['X', 'O']:
+        
+    #     choice = input("Choose X or O as a player 1: ").upper()
+    #     choice2 = input("Please choose the opposite as player 2: ").upper()
+        
+    #     if (choice and choice2 not in ['X','O']):          
+    #         print("Sorry, I didn't understand. Please make sure to choose X or O.")
+    #     elif choice and choice2 == 'X' or 'O': 
+    #         print('Player 1 chose: ' + choice, ' and Player 2 chose: ' + choice2 )
+    #         return (choice, choice2)
+    # else:
+    #     return False        
+    
     
 
-def desired_marker(board, marker, position):
-    # do i want a dict? assigning the marker to a board index / position
-    
-    position = int(input("Please choose a position between 1-9 to place your marker"))
-    board[position] = marker
     
 
 def win_check(board, mark):
-    if mark != 'X' or 'O':
-        return (
-            print("Please provide X or O as your mark")
-        ) 
-    else:
-        return (
-        (board[0:3] == mark) or
-        (board[3:6] == mark) or
-        (board[6:9] == mark) or
-        (board[7] and board[4] and board[1] == mark) or
-        (board[8] and board[5] and board[2] == mark) or
-        (board[9] and board[6] and board[3] == mark) or
-        (board[9] and board[5] and board[1] == mark)
-    )
+    #     return (
+    #     (board[0:3] == mark) or
+    #     (board[3:6] == mark) or
+    #     (board[6:9] == mark) or
+    #     (board[7] and board[4] and board[1] == mark) or
+    #     (board[8] and board[5] and board[2] == mark) or
+    #     (board[9] and board[6] and board[3] == mark) or
+    #     (board[9] and board[5] and board[1] == mark)
+    # )
+    return ((board[7] == mark and board[8] == mark and board[9] == mark) or # across the top
+    (board[4] == mark and board[5] == mark and board[6] == mark) or # across the middle
+    (board[1] == mark and board[2] == mark and board[3] == mark) or # across the bottom
+    (board[7] == mark and board[4] == mark and board[1] == mark) or # down the middle
+    (board[8] == mark and board[5] == mark and board[2] == mark) or # down the middle
+    (board[9] == mark and board[6] == mark and board[3] == mark) or # down the right side
+    (board[7] == mark and board[5] == mark and board[3] == mark) or # diagonal
+    (board[9] == mark and board[5] == mark and board[1] == mark)) # diagonal
         
 def choose_first():
     number = random.randint(0,5)
@@ -67,10 +74,7 @@ def choose_first():
         return print("Player 2 may go first")
 
 def space_check(board, position):
-    if board[position] == ' ':
-        return True
-    else:
-        return False
+    return board[position] == ' '
 
 def full_board_check(board):
     ## i wrote the code as following:
@@ -85,11 +89,16 @@ def full_board_check(board):
     return True
 
 def player_choice(board):
-    position = int(input("Choose a position for your marker \n Numbers 0 to 2 are the Top position from left to right \n Numbers 3 -5 the middle from left to right and \n numbers 6-8 the bottom. Type here: "))
+    position = int(input("\n Numbers 1-3 are the top position from left to right \n Numbers 4-6 the middle from left to right and \n Numbers 7-9 are the bottom \n\n Choose your position: "))
     if space_check(board, position) == True:
         return position
     else:
         print("Try again with another position!")
+
+def desired_marker(board, marker, position):
+    # do i want a dict? assigning the marker to a board index / position
+    board[position] = marker
+    #  return board
 
 def replay():
     
@@ -100,7 +109,7 @@ def replay():
     while choice not in ['Y','N']:
         
         # we shouldn't convert here, otherwise we get an error on a wrong input
-        choice = input("Would you like to keep playing? Y or N ")
+        choice = input("Would you like to keep playing? Y or N ").upper()
 
         
         if choice not in ['Y','N']:
@@ -129,17 +138,31 @@ print("Welcome to Tic Tac Toe!")
 while True:
     # Reset the board
     theBoard = [' '] * 10
+    #Ask the player to input which marker they want
     player1_marker, player2_marker = player_input()
+    #Check with IF/ELIF if the chosen markers are the same for both players
+    if player1_marker == 'X' and player2_marker == 'X':
+        print("Don't choose the same marker as both Players")
+        # variables have to be set to the default value to prevent a loophole 
+        player1_marker and player2_marker == 'wrong'
+        # run the input function again if statement is True
+        player_input()
+    elif player1_marker =='O' and player2_marker == 'O':
+        print("Don't choose the same marker as both players") 
+        player1_marker and player2_marker == 'wrong'
+        player_input()
+
+    # Function to define randomly who can start first
     turn = choose_first()
-    print(turn)
-    
-    play_game = input('Are you ready to play? Enter Yes or No.')
-    
+    # Ask if the users are reado to player
+    play_game = input('Are you ready to play? Enter Yes or No: ')
+    # Logic to handle the input
     if play_game.lower()[0] == 'y':
         game_on = True
     else:
         game_on = False
 
+    #While loop when the users want to play
     while game_on:
         if turn == 'Player 1':
             # Player1's turn.
@@ -156,7 +179,7 @@ while True:
                 if full_board_check(theBoard):
                     display_board(theBoard)
                     print('The game is a draw!')
-                    break
+                    game_on = False
                 else:
                     turn = 'Player 2'
 
@@ -175,7 +198,7 @@ while True:
                 if full_board_check(theBoard):
                     display_board(theBoard)
                     print('The game is a draw!')
-                    break
+                    game_on = False
                 else:
                     turn = 'Player 1'
 
