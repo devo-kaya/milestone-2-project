@@ -4,14 +4,14 @@
 def splitDeck(deck,pl1,pl2):
     middle_index = 26
     list_one = deck.all_cards[:middle_index]
-    list_two = deck.all_cards[middle_index:]
+    list_two = deck.all_cards[middle_index:-1]
     
     #Add the splitted deck to each player
     pl1.add_cards(list_one)
     pl2.add_cards(list_two)
     
 # Function to check whether someone has lost already. 0 Cards left   
-def checkPlayerDeck(player1,player2):
+def checkIfPlayerHasEnoughCards(player1,player2):
     if len(player1.all_cards) == 0:
         return True and print(f"{player1.name} has 0 cards left! {player2.name} Wins!")
     elif len(player2.all_cards) == 0:
@@ -20,9 +20,9 @@ def checkPlayerDeck(player1,player2):
         return False
     
 def checkWarDeck(player1,player2):
-    if len(player1.all_cards) < 8:
+    if len(player1.all_cards) < 3:
         return True and print(f"{player1.name} cannot go to war! {player2.name} Wins!")
-    elif len(player2.all_cards) < 8:
+    elif len(player2.all_cards) < 3:
         return True and print(f"{player2.name} cannot go to war! {player1.name} Wins!")
     else:
         return False
@@ -53,4 +53,4 @@ def checkRanking(pl1, pl2, list1,list2):
     elif list2[-1].value > list1[-1].value:
         pl2.add_cards(list1)
         pl2.add_cards(list2)
-        return True    
+        return True

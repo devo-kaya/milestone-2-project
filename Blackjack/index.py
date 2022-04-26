@@ -10,7 +10,7 @@ def hit_or_stand(deck,hand):
         
         if x[0].lower() == 'h':
             hit(deck,hand)  # hit() function defined above
-
+    
         elif x[0].lower() == 's':
             print("Player stands. Dealer is playing.")
             playing = False
@@ -82,7 +82,7 @@ while True:
             player_wins(player_hand,dealer_hand,player_chips)
             
         else:
-            push(player_hand,dealer_hand)      
+            push(player_hand,dealer_hand,player_chips)      
             
     # Inform Player of their chips total 
     print("\nPlayer's winnings stand at",player_chips.total)
@@ -91,7 +91,8 @@ while True:
     new_game = input("Would you like to play another hand? Enter 'y' or 'n' ")
     if player_chips.total <= 0:
         print("You don't have chips anymore! Thanks for playing!")
-        break
+        break # or just playing = False?
+    
     elif new_game[0].lower()=='y':
         playing=True
         continue

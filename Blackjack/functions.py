@@ -70,6 +70,7 @@ def dealer_wins(player,dealer,chips):
     print("Dealer wins!")
     chips.lose_bet()
     
-def push(player,dealer):
+def push(player,dealer, chips):
     print(f"Dealer ({dealer.value}) and Player ({player.value}) tie! It's a push.")
+    chips.return_bet()
     

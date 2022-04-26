@@ -1,5 +1,5 @@
 from posixpath import split
-from functions import checkWarDeck, splitDeck, checkPlayerDeck, addThreeCards, pullCardfromDeck, checkRanking
+from functions import checkWarDeck, splitDeck, checkIfPlayerHasEnoughCards, addThreeCards, pullCardfromDeck, checkRanking
 from classes import  Deck, Player
 
 # Game Logic
@@ -35,8 +35,9 @@ while game_on:
     if round_num > 1000:
         print("The game goes on for too long! It is a draw!")
         game_on = False
+        
 #Check if any player is out of cards completely
-    if checkPlayerDeck(Player_One,Player_Two) == True:
+    if checkIfPlayerHasEnoughCards(Player_One,Player_Two) == True:
         game_on = False
     else:
         at_war = True

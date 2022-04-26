@@ -7,14 +7,6 @@ values = {
     "Nine": 9, "Ten": 10, "Jack": 10, "Queen":10, "King": 10, "Ace": 11
 }
 
-class State():
-    
-    def __init__(self,chips):
-        
-        self.chips = chips
-        
-    def __str__(self):
-        return "Player has " + self.chips + " left"
 
 class Card():
     
@@ -83,3 +75,7 @@ class Chips:
     
     def lose_bet(self):
         self.total -= self.bet
+    
+    def return_bet(self):
+        self.total += (self.bet*0.5)
+        

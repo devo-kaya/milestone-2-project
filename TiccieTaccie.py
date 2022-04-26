@@ -1,6 +1,7 @@
 from IPython.display import clear_output
 import random
 
+
 the_board = [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
 
 def display_board(board): 
@@ -173,7 +174,7 @@ while True:
 
             if win_check(theBoard, player1_marker):
                 display_board(theBoard)
-                print('Congratulations! You have won the game!')
+                print(f'Congratulations! {turn} have won the game!')
                 game_on = False
             else:
                 if full_board_check(theBoard):
@@ -201,6 +202,6 @@ while True:
                     game_on = False
                 else:
                     turn = 'Player 1'
-
+        
     if not replay():
         break
